@@ -50,8 +50,11 @@ int main(void) {
             velocity.x = -moveSpd;
         if (IsKeyDown(KEY_D))
             velocity.x = moveSpd;
-        if (IsKeyDown(KEY_S))
+        if (IsKeyDown(KEY_S)) {
             velocity.x -= velocity.x * 8 * timestep;
+            if (velocity.y > 0.0f)
+                velocity.y += velocity.y * 4 * timestep;
+        }
 
         // handle off-screen
         if (pos.x > WIDTH) pos.x -= WIDTH;
@@ -61,7 +64,6 @@ int main(void) {
         playerPointColl = (Rectangle) {pos.x, pos.y + player.y - 1, player.x, 1};
         if (CheckCollisionRecs(playerPointColl, ground))
             velocity.y = jumpSpd;
-
         checkCollisionPlatforms(platforms, platformSize, playerPointColl, killZone, &velocity, &platformStart, platformGap);
 
         // set camera target
@@ -71,10 +73,12 @@ int main(void) {
         // update kill zone and check game over
         killZone.y = target.y + center.y;
         if (CheckCollisionPointRec(pos, killZone)) {
+            // reset player params
             velocity = Vector2Zero();
             pos = (Vector2) {(float) WIDTH / 2, 800};
             target = center;
 
+            // reset platforms params
             platformStart = 550.0f;
             platformGap = 250.0f;
             generatePlatforms(platforms, platformSize, &platformStart, platformGap);
@@ -169,7 +173,7 @@ void checkCollisionPlatforms(Vector2 platforms[5], Vector2 platformSize, Rectang
 }
 
 void drawPlatformsPosScreen(Vector2 platforms[5]) {
-    int start = 185;
+    int start = 130;
     int gap = 16;
     for(int i = 0; i < 5; i++) {
         DrawText(TextFormat("%d\t\t%.0f\t\t%.0f", i, platforms[i].x, platforms[i].y), 10, start, 20, WHITE);
