@@ -1,17 +1,24 @@
 #include <raylib.h>
 #include <raymath.h>
+#include <stdio.h>
+#include <string.h>
 #include "globals.h"
 
 void drawPlayerOutOfScreen(Vector2 pos, Vector2 player, Color color);
 void velocityVerlet(Vector2 *position, Vector2 *velocity, float mass, float timestep);
+
 void generatePlatforms(Vector2 platforms[5], Vector2 platformSize, float *start, float gap);
 void drawPlatforms(Vector2 platforms[5], Vector2 platformSize);
 void checkCollisionPlatforms(Vector2 platforms[5], Vector2 platformSize, Rectangle playerPointColl, Rectangle killZone, Vector2 *velocity, float *start, float gap);
 void drawPlatformsPosScreen(Vector2 platforms[5]);
 
+void loadScore(char **data);
+void addScore(char **data, float score);
+
 int main(void) {
 
     // raylib
+    SetTraceLogLevel(LOG_WARNING);
     InitWindow(WIDTH, HEIGHT, "Jump Thingy");
 
     // player
@@ -32,14 +39,19 @@ int main(void) {
     float timestep = 0.0f;
     Rectangle ground = {0, 800, WIDTH, HEIGHT};
 
+    // platforms
     Vector2 platforms [5];
     Vector2 platformSize = {80, 10};
     float platformStart = 550.0f;
     float platformGap = 250.0f;
-    Rectangle killZone = {0.0f, HEIGHT, WIDTH, 200.0f};
-
+    Rectangle killZone = {-WIDTH, HEIGHT, 2 *WIDTH, 200.0f};
     generatePlatforms(platforms, platformSize, &platformStart, platformGap);
 
+    // score
+    char *data = nullptr;
+    loadScore(&data);
+
+    // game loop
     while(!WindowShouldClose()) {
 
         // calculate player velocity
@@ -72,7 +84,10 @@ int main(void) {
 
         // update kill zone and check game over
         killZone.y = target.y + center.y;
-        if (CheckCollisionPointRec(pos, killZone)) {
+        if (CheckCollisionPointRec(pos, killZone) || IsKeyPressed(KEY_R)) {
+            //save score
+            addScore(&data, pos.y);
+
             // reset player params
             velocity = Vector2Zero();
             pos = (Vector2) {(float) WIDTH / 2, 800};
@@ -109,6 +124,9 @@ int main(void) {
 
     }
 
+    // save score and unload
+    SaveFileText("score.txt", data);
+    UnloadFileText(data);
     CloseWindow();
 
     return 0;
@@ -179,4 +197,32 @@ void drawPlatformsPosScreen(Vector2 platforms[5]) {
         DrawText(TextFormat("%d\t\t%.0f\t\t%.0f", i, platforms[i].x, platforms[i].y), 10, start, 20, WHITE);
         start += gap;
     }
+}
+
+void loadScore(char **data) {
+    if (FileExists("score.txt")) {
+        *data = LoadFileText("score.txt");
+    } else {
+        *data = "[HIGH SCORES]\0";
+        if (SaveFileText("score.txt", *data))
+            *data = LoadFileText("score.txt");
+    }
+}
+
+void addScore(char **data, float score) {
+    char buffer[10];
+    sprintf(buffer, "%9.0f", fabsf(score));
+    size_t currentLength = strlen(*data);
+    size_t newLength = currentLength + strlen(buffer) + 5;
+    char *newData = MemAlloc(newLength);
+
+    strcpy(newData, *data);
+    strcat(newData, name);
+    strcat(newData, " ");
+    strcat(newData, buffer);
+    strcat(newData, "\n\0");
+
+    SaveFileText("score.txt", newData);
+    MemFree(*data);
+    *data = newData;
 }

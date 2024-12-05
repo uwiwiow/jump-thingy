@@ -6,5 +6,6 @@
 extern float gravity;
 static float jumpSpd = -1000.0f;
 static float moveSpd = 300.0f;
+static char *name = "GPB";
 
 #endif //GLOBALS_H
