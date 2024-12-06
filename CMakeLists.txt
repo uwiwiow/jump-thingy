@@ -6,7 +6,6 @@ set(CMAKE_C_STANDARD 23)
 find_package(raylib REQUIRED)
 
 add_executable(jumpThingy src/main.c
-        src/globals.c
         includes/globals.h)
 
 target_link_libraries(jumpThingy raylib GL m pthread dl rt X11)
