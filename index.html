@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Jump Thingy: Main Page</title>
+<title>Jump Thingy: Jump Thingy Documentation</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Jump Thingy<span id="projectnumber">&#160;0.1</span>
+   <div id="projectname">Jump Thingy<span id="projectnumber">&#160;1.0</span>
    </div>
    <div id="projectbrief">Jump platform game</div>
   </td>
@@ -69,10 +69,107 @@ $(function() {
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">Jump Thingy Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title">Jump Thingy Documentation </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><h1><a class="anchor" id="intro_sec"></a>
+Introduction</h1>
+<p>Jump Thingy is a simple platformer game where you control a character that must jump between platforms while avoiding falling off the screen. It is a project developed in C using <a href="https://www.raylib.com/">raylib</a> as the graphics library.</p>
+<h1><a class="anchor" id="description_sec"></a>
+Description</h1>
+<p>In Jump Thingy, your goal is to keep the player moving across platforms without falling into the kill zone. Platforms are generated randomly, and the player can move sideways and jump to avoid obstacles and keep progressing.</p>
+<h1><a class="anchor" id="features_sec"></a>
+Features</h1>
+<ul>
+<li>Random platform generation.</li>
+<li>Basic physics simulation (gravity and forces).</li>
+<li>Collision detection with platforms and screen edges.</li>
+<li>Smooth movement and intuitive controls.</li>
+<li>Uses <a href="https://www.raylib.com/">raylib</a> for graphics and input handling.</li>
+</ul>
+<h1><a class="anchor" id="requirements_sec"></a>
+Requirements</h1>
+<p>To compile and run the game, you need:</p>
+<ul>
+<li><b>Operating System</b>: Linux.</li>
+<li><b>Compiler</b>: GCC or any C-compatible compiler.</li>
+<li><b>Libraries</b>:<ul>
+<li><a href="https://github.com/raysan5/raylib">raylib</a> (installed and linked).</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="compilation_sec"></a>
+Compilation</h1>
+<ol type="1">
+<li>Clone this repository: <div class="fragment"><div class="line">git clone https://github.com/uwiwiow/jump-thingy.git</div>
+<div class="line">cd jump-thingy</div>
+</div><!-- fragment --></li>
+<li>Compile the project using CMake: <div class="fragment"><div class="line">mkdir build</div>
+<div class="line">cd build</div>
+<div class="line">cmake ..</div>
+<div class="line">make</div>
+</div><!-- fragment --></li>
+<li>Run the generated binary: <div class="fragment"><div class="line">./jumpThingy</div>
+</div><!-- fragment --></li>
+</ol>
+<h1><a class="anchor" id="online_docs_sec"></a>
+Online Documentation</h1>
+<p>You can access the documentation directly online via GitHub Pages: <a href="https://uwiwiow.github.io/jump-thingy/index.html">Jump Thingy Documentation</a></p>
+<h1><a class="anchor" id="local_docs_sec"></a>
+Local Documentation Generation</h1>
+<p>If you prefer to generate and view the documentation locally, follow these steps:</p>
+<ol type="1">
+<li>First, ensure you have <a href="https://www.doxygen.nl/">Doxygen</a> installed.</li>
+<li>In the project root directory, where the <code>docs</code> folder is located, run the following command: <div class="fragment"><div class="line">doxygen docs/Doxyfile</div>
+</div><!-- fragment --></li>
+<li>The documentation will be generated in the <code>docs/doxygen</code> directory. Open the HTML files inside the <code>docs/doxygen/html</code> folder in your browser to view the documentation.</li>
+</ol>
+<h1><a class="anchor" id="controls_sec"></a>
+Controls</h1>
+<pre class="fragment">A: Move left.
+D: Move right.
+S: Reduce falling speed.
+R: Restart the game.
+</pre> <h1><a class="anchor" id="debug_mode_sec"></a>
+Debug Mode</h1>
+<p>The game includes a <b>Debug Mode</b> to help with development and testing. You can enable or disable it by modifying the <code><a class="el" href="globals_8h.html">globals.h</a></code> file.</p>
+<ul>
+<li>How to Enable Debug Mode:<ol type="1">
+<li>Open the <code><a class="el" href="globals_8h.html">includes/globals.h</a></code> file.</li>
+<li>Set the <code>DEBUG</code> macro to <code>1</code> to enable debug mode, or <code>0</code> to disable it: <div class="fragment"><div class="line"><span class="preprocessor">#define DEBUG 1  </span><span class="comment">// Enable Debug Mode</span></div>
+</div><!-- fragment --></li>
+</ol>
+</li>
+<li>Debug Features:<ul>
+<li>The positions of all platforms are displayed on the screen.</li>
+<li>Pressing the C key resets the player's position without restarting the entire game.</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="project_structure_sec"></a>
+Project Structure</h1>
+<pre class="fragment">    .
+    ├── CMakeLists.txt        # Build configuration with CMake
+    ├── docs
+    │   ├── Doxyfile          # Documentation configuration with Doxygen
+    │   ├── doxygen           # Documentation output
+    ├── includes              # Header files
+    └── src                   # Source files
+</pre> <h1><a class="anchor" id="how_to_play_sec"></a>
+How to Play</h1>
+<p>The goal is to avoid falling into the kill zone while jumping across platforms. Use A and D to move sideways, S to control your falling speed, and R to reset the game. Try to survive as long as possible!</p>
+<h1><a class="anchor" id="license_sec"></a>
+License</h1>
+<p>This project is licensed under the <a href="https://github.com/uwiwiow/jump-thingy/blob/main/LICENSE">MIT License</a>. Feel free to use, modify, and share it.</p>
+<h1><a class="anchor" id="contributions_sec"></a>
+Contributions</h1>
+<p>Contributions are welcome! If you find a bug or have a suggestion, open an <a href="https://github.com/uwiwiow/jump-thingy/issues">issue</a> or submit a pull request.</p>
+<h1><a class="anchor" id="contact_sec"></a>
+Contact</h1>
+<p>Developed by Uwiwiow.</p>
+<p><a href="https://github.com/uwiwiow">GitHub</a> | <a href="#" onclick="location.href='mai'+'lto:'+'gae'+'l.'+'per'+'ez'+'.de'+'v@'+'gma'+'il'+'.co'+'m'; return false;">Mail</a> </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

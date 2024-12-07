@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['width_0',['WIDTH',['../globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d',1,'globals.h']]]
+  ['jump_20thingy_20documentation_0',['Jump Thingy Documentation',['../index.html',1,'']]],
+  ['jumpspd_1',['jumpSpd',['../globals_8h.html#a8461b3a410154ab32febdbde183d5945',1,'globals.h']]]
 ];
