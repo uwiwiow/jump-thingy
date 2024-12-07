@@ -50,7 +50,7 @@ int main(void) {
                 velocity.y += velocity.y * 4 * timestep;
         }
 
-#if debug
+#if DEBUG
         if (IsKeyDown(KEY_C))
             pos = (Vector2) {(float) WIDTH / 2, 800};
 #endif
@@ -117,7 +117,7 @@ int main(void) {
 
             DrawText(TextFormat("POS\n%.2f\n%.2f\n\nVEL\n%.2f\n%.2f", pos.x, pos.y, velocity.x, velocity.y), 10, 10, 20, WHITE);
 
-#if debug
+#if DEBUG
             platformsDrawPos(platforms);
 #endif
 

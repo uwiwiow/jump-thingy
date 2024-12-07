@@ -15,9 +15,6 @@ jobs:
       - name: Doxygen Action
         uses: mattnotmitt/doxygen-action@1.9.8
 
-      - name: List doxygen directory contents
-        run: ls -R doxygen
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/main'
