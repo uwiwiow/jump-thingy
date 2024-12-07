@@ -70,13 +70,13 @@ If you prefer to generate and view the documentation locally, follow these steps
 
 1. First, ensure you have [Doxygen](https://www.doxygen.nl/) installed.
 
-2. In the project root directory, where the `Doxyfile` is located, run the following command:
+2. In the project root directory, where the `docs` folder is located, run the following command:
 
     ```bash
-    doxygen Doxyfile
+    doxygen docs/Doxyfile
     ```
 
-3. The documentation will be generated in the `doxygen` directory. Open the HTML files inside the `doxygen/html` folder in your browser to view the documentation.
+3. The documentation will be generated in the `docs/doxygen` directory. Open the HTML files inside the `docs/doxygen/html` folder in your browser to view the documentation.
 
 ---
 
@@ -113,18 +113,12 @@ When Debug Mode is enabled:
 ## 📚 Project Structure
 
     .
-    ├── CMakeLists.txt      # Build configuration with CMake
-    ├── Doxyfile            # Documentation configuration with Doxygen
-    ├── includes            # Header files
-    │   ├── globals.h
-    │   ├── platforms.h
-    │   └── player.h
-    ├── src                 # Source files
-    │   ├── main.c
-    │   ├── platforms.c
-    │   └── player.c
-    └── doxygen             # Documentation output
-
+    ├── CMakeLists.txt        # Build configuration with CMake
+    ├── docs
+    │   ├── Doxyfile          # Documentation configuration with Doxygen
+    │   ├── doxygen           # Documentation output
+    ├── includes              # Header files
+    └── src                   # Source files
 ---
 
 ## 🕹️ How to Play
