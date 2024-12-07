@@ -152,7 +152,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">   50</span>                velocity.y += velocity.y * 4 * timestep;</div>
 <div class="line"><span class="lineno">   51</span>        }</div>
 <div class="line"><span class="lineno">   52</span> </div>
-<div class="line"><span class="lineno">   53</span><span class="preprocessor">#if debug</span></div>
+<div class="line"><span class="lineno">   53</span><span class="preprocessor">#if DEBUG</span></div>
 <div class="line"><span class="lineno">   54</span>        <span class="keywordflow">if</span> (IsKeyDown(KEY_C))</div>
 <div class="line"><span class="lineno">   55</span>            pos = (Vector2) {(float) <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> / 2, 800};</div>
 <div class="line"><span class="lineno">   56</span><span class="preprocessor">#endif</span></div>
@@ -219,7 +219,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  117</span> </div>
 <div class="line"><span class="lineno">  118</span>            DrawText(TextFormat(<span class="stringliteral">&quot;POS\n%.2f\n%.2f\n\nVEL\n%.2f\n%.2f&quot;</span>, pos.x, pos.y, velocity.x, velocity.y), 10, 10, 20, WHITE);</div>
 <div class="line"><span class="lineno">  119</span> </div>
-<div class="line"><span class="lineno">  120</span><span class="preprocessor">#if debug</span></div>
+<div class="line"><span class="lineno">  120</span><span class="preprocessor">#if DEBUG</span></div>
 <div class="line"><span class="lineno">  121</span>            <a class="code hl_function" href="platforms_8h.html#ae9f1d75c4e97deb9774c4864ef431fb6">platformsDrawPos</a>(platforms);</div>
 <div class="line"><span class="lineno">  122</span><span class="preprocessor">#endif</span></div>
 <div class="line"><span class="lineno">  123</span> </div>
@@ -234,10 +234,10 @@ Functions</h2></td></tr>
 <div class="line"><span class="lineno">  132</span> </div>
 <div class="line"><span class="lineno">  133</span>    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><span class="lineno">  134</span>}</div>
-<div class="ttc" id="aglobals_8h_html_a241aeeb764887ae5e3de58b98f04b16d"><div class="ttname"><a href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a></div><div class="ttdeci">#define WIDTH</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00004">globals.h:4</a></div></div>
-<div class="ttc" id="aglobals_8h_html_a79e87309ea4ea5f45f8c579ac955ecad"><div class="ttname"><a href="globals_8h.html#a79e87309ea4ea5f45f8c579ac955ecad">moveSpd</a></div><div class="ttdeci">static float moveSpd</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00009">globals.h:9</a></div></div>
-<div class="ttc" id="aglobals_8h_html_a8461b3a410154ab32febdbde183d5945"><div class="ttname"><a href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a></div><div class="ttdeci">static float jumpSpd</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00008">globals.h:8</a></div></div>
-<div class="ttc" id="aglobals_8h_html_aed89bd71aee8be823e8a20ec4e093c1e"><div class="ttname"><a href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a></div><div class="ttdeci">#define HEIGHT</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00005">globals.h:5</a></div></div>
+<div class="ttc" id="aglobals_8h_html_a241aeeb764887ae5e3de58b98f04b16d"><div class="ttname"><a href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a></div><div class="ttdeci">#define WIDTH</div><div class="ttdoc">The width of the game window in pixels.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00004">globals.h:4</a></div></div>
+<div class="ttc" id="aglobals_8h_html_a79e87309ea4ea5f45f8c579ac955ecad"><div class="ttname"><a href="globals_8h.html#a79e87309ea4ea5f45f8c579ac955ecad">moveSpd</a></div><div class="ttdeci">static float moveSpd</div><div class="ttdoc">The horizontal movement speed of the player.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00020">globals.h:20</a></div></div>
+<div class="ttc" id="aglobals_8h_html_a8461b3a410154ab32febdbde183d5945"><div class="ttname"><a href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a></div><div class="ttdeci">static float jumpSpd</div><div class="ttdoc">The vertical speed of the player when jumping.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00019">globals.h:19</a></div></div>
+<div class="ttc" id="aglobals_8h_html_aed89bd71aee8be823e8a20ec4e093c1e"><div class="ttname"><a href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a></div><div class="ttdeci">#define HEIGHT</div><div class="ttdoc">The height of the game window in pixels.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00005">globals.h:5</a></div></div>
 <div class="ttc" id="aplatforms_8h_html_a27a9c0e83f6ba9dc75942dd30b4605b9"><div class="ttname"><a href="platforms_8h.html#a27a9c0e83f6ba9dc75942dd30b4605b9">platformsDraw</a></div><div class="ttdeci">void platformsDraw(Vector2 platforms[5], Vector2 platformSize)</div><div class="ttdoc">Draws all the platforms in the array.</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00011">platforms.c:11</a></div></div>
 <div class="ttc" id="aplatforms_8h_html_a429c7cfd5c46fe565f2a29c010740b13"><div class="ttname"><a href="platforms_8h.html#a429c7cfd5c46fe565f2a29c010740b13">platformsCheckCollision</a></div><div class="ttdeci">void platformsCheckCollision(Vector2 platforms[5], Vector2 platformSize, Rectangle playerPointColl, Rectangle killZone, Vector2 *velocity, float *start, float gap)</div><div class="ttdoc">Checks for collisions between the player's hit-box, each platform, and the kill zone.</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00022">platforms.c:22</a></div></div>
 <div class="ttc" id="aplatforms_8h_html_a52d7492c0788729233f592368beb9f71"><div class="ttname"><a href="platforms_8h.html#a52d7492c0788729233f592368beb9f71">platformsInit</a></div><div class="ttdeci">void platformsInit(Vector2 platforms[5], Vector2 platformSize, float *start, float gap)</div><div class="ttdoc">Initialize the platforms array with random values, starting at start and decrementing by gap for each...</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00004">platforms.c:4</a></div></div>

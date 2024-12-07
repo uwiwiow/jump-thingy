@@ -131,7 +131,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                velocity.y += velocity.y * 4 * timestep;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        }</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#if debug</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#if DEBUG</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordflow">if</span> (IsKeyDown(KEY_C))</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            pos = (Vector2) {(float) <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> / 2, 800};</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="preprocessor">#endif</span></div>
@@ -198,7 +198,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            DrawText(TextFormat(<span class="stringliteral">&quot;POS\n%.2f\n%.2f\n\nVEL\n%.2f\n%.2f&quot;</span>, pos.x, pos.y, velocity.x, velocity.y), 10, 10, 20, WHITE);</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#if debug</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="preprocessor">#if DEBUG</span></div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <a class="code hl_function" href="platforms_8h.html#ae9f1d75c4e97deb9774c4864ef431fb6">platformsDrawPos</a>(platforms);</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span> </div>
@@ -215,10 +215,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>}</div>
 </div>
 <div class="ttc" id="aglobals_8h_html"><div class="ttname"><a href="globals_8h.html">globals.h</a></div></div>
-<div class="ttc" id="aglobals_8h_html_a241aeeb764887ae5e3de58b98f04b16d"><div class="ttname"><a href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a></div><div class="ttdeci">#define WIDTH</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00004">globals.h:4</a></div></div>
-<div class="ttc" id="aglobals_8h_html_a79e87309ea4ea5f45f8c579ac955ecad"><div class="ttname"><a href="globals_8h.html#a79e87309ea4ea5f45f8c579ac955ecad">moveSpd</a></div><div class="ttdeci">static float moveSpd</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00009">globals.h:9</a></div></div>
-<div class="ttc" id="aglobals_8h_html_a8461b3a410154ab32febdbde183d5945"><div class="ttname"><a href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a></div><div class="ttdeci">static float jumpSpd</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00008">globals.h:8</a></div></div>
-<div class="ttc" id="aglobals_8h_html_aed89bd71aee8be823e8a20ec4e093c1e"><div class="ttname"><a href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a></div><div class="ttdeci">#define HEIGHT</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00005">globals.h:5</a></div></div>
+<div class="ttc" id="aglobals_8h_html_a241aeeb764887ae5e3de58b98f04b16d"><div class="ttname"><a href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a></div><div class="ttdeci">#define WIDTH</div><div class="ttdoc">The width of the game window in pixels.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00004">globals.h:4</a></div></div>
+<div class="ttc" id="aglobals_8h_html_a79e87309ea4ea5f45f8c579ac955ecad"><div class="ttname"><a href="globals_8h.html#a79e87309ea4ea5f45f8c579ac955ecad">moveSpd</a></div><div class="ttdeci">static float moveSpd</div><div class="ttdoc">The horizontal movement speed of the player.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00020">globals.h:20</a></div></div>
+<div class="ttc" id="aglobals_8h_html_a8461b3a410154ab32febdbde183d5945"><div class="ttname"><a href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a></div><div class="ttdeci">static float jumpSpd</div><div class="ttdoc">The vertical speed of the player when jumping.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00019">globals.h:19</a></div></div>
+<div class="ttc" id="aglobals_8h_html_aed89bd71aee8be823e8a20ec4e093c1e"><div class="ttname"><a href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a></div><div class="ttdeci">#define HEIGHT</div><div class="ttdoc">The height of the game window in pixels.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00005">globals.h:5</a></div></div>
 <div class="ttc" id="amain_8c_html_a840291bc02cba5474a4cb46a9b9566fe"><div class="ttname"><a href="main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a></div><div class="ttdeci">int main(void)</div><div class="ttdef"><b>Definition</b> <a href="main_8c_source.html#l00007">main.c:7</a></div></div>
 <div class="ttc" id="aplatforms_8h_html"><div class="ttname"><a href="platforms_8h.html">platforms.h</a></div></div>
 <div class="ttc" id="aplatforms_8h_html_a27a9c0e83f6ba9dc75942dd30b4605b9"><div class="ttname"><a href="platforms_8h.html#a27a9c0e83f6ba9dc75942dd30b4605b9">platformsDraw</a></div><div class="ttdeci">void platformsDraw(Vector2 platforms[5], Vector2 platformSize)</div><div class="ttdoc">Draws all the platforms in the array.</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00011">platforms.c:11</a></div></div>

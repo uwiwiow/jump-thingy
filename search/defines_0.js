@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['debug_0',['debug',['../globals_8h.html#a322565ccf348d13e4d3de13af771e5fc',1,'globals.h']]]
+  ['debug_0',['DEBUG',['../globals_8h.html#ad72dbcf6d0153db1b8d8a58001feed83',1,'globals.h']]]
 ];
