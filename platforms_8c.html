@@ -77,6 +77,7 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="platforms_8h_source.html">platforms.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="globals_8h_source.html">globals.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
 </div>
 <p><a href="platforms_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -169,25 +170,26 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="platforms_8c_source.html#l00022">22</a> of file <a class="el" href="platforms_8c_source.html">platforms.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   22</span>                                                                                                                                                                    {</div>
-<div class="line"><span class="lineno">   23</span>    Rectangle platform;</div>
-<div class="line"><span class="lineno">   24</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 5; i++) {</div>
-<div class="line"><span class="lineno">   25</span>        platform = (Rectangle) {platforms[i].x, platforms[i].y, platformSize.x, platformSize.y};</div>
-<div class="line"><span class="lineno">   26</span>        <span class="keywordflow">if</span> (CheckCollisionRecs(playerPointColl,</div>
-<div class="line"><span class="lineno">   27</span>                               platform)</div>
-<div class="line"><span class="lineno">   28</span>            &amp;&amp; velocity-&gt;y &gt; 0.0f) {</div>
-<div class="line"><span class="lineno">   29</span>            velocity-&gt;y = <a class="code hl_variable" href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a>;</div>
-<div class="line"><span class="lineno">   30</span>        }</div>
-<div class="line"><span class="lineno">   31</span>        <span class="keywordflow">if</span> (CheckCollisionRecs(killZone,</div>
-<div class="line"><span class="lineno">   32</span>                               platform)) {</div>
-<div class="line"><span class="lineno">   33</span>            <a class="code hl_function" href="platforms_8c.html#a1f84d28d64bffb7729a9e9ab6b9dca39">platformUpdate</a>(&amp;platforms[i], platformSize, start, gap);</div>
-<div class="line"><span class="lineno">   34</span>        }</div>
-<div class="line"><span class="lineno">   35</span> </div>
-<div class="line"><span class="lineno">   36</span>    }</div>
-<div class="line"><span class="lineno">   37</span>}</div>
-<div class="ttc" id="aglobals_8h_html_a8461b3a410154ab32febdbde183d5945"><div class="ttname"><a href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a></div><div class="ttdeci">static float jumpSpd</div><div class="ttdoc">The vertical speed of the player when jumping.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00019">globals.h:19</a></div></div>
-<div class="ttc" id="aplatforms_8c_html_a1f84d28d64bffb7729a9e9ab6b9dca39"><div class="ttname"><a href="platforms_8c.html#a1f84d28d64bffb7729a9e9ab6b9dca39">platformUpdate</a></div><div class="ttdeci">void platformUpdate(Vector2 *platform, Vector2 platformSize, float *start, float gap)</div><div class="ttdoc">Updates the values of a single platform.</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00017">platforms.c:17</a></div></div>
+<p class="definition">Definition at line <a class="el" href="platforms_8c_source.html#l00023">23</a> of file <a class="el" href="platforms_8c_source.html">platforms.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   23</span>                                                                                                                                                                    {</div>
+<div class="line"><span class="lineno">   24</span>    Rectangle platform;</div>
+<div class="line"><span class="lineno">   25</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 5; i++) {</div>
+<div class="line"><span class="lineno">   26</span>        platform = <a class="code hl_function" href="utils_8h.html#aef5ffaf7bd00a1ba72c41d4e949437a3">rectangle</a>(platforms[i].x, platforms[i].y, platformSize.x, platformSize.y);</div>
+<div class="line"><span class="lineno">   27</span>        <span class="keywordflow">if</span> (CheckCollisionRecs(playerPointColl,</div>
+<div class="line"><span class="lineno">   28</span>                               platform)</div>
+<div class="line"><span class="lineno">   29</span>            &amp;&amp; velocity-&gt;y &gt; 0.0f) {</div>
+<div class="line"><span class="lineno">   30</span>            velocity-&gt;y = <a class="code hl_variable" href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a>;</div>
+<div class="line"><span class="lineno">   31</span>        }</div>
+<div class="line"><span class="lineno">   32</span>        <span class="keywordflow">if</span> (CheckCollisionRecs(killZone,</div>
+<div class="line"><span class="lineno">   33</span>                               platform)) {</div>
+<div class="line"><span class="lineno">   34</span>            <a class="code hl_function" href="platforms_8c.html#a1f84d28d64bffb7729a9e9ab6b9dca39">platformUpdate</a>(&amp;platforms[i], platformSize, start, gap);</div>
+<div class="line"><span class="lineno">   35</span>        }</div>
+<div class="line"><span class="lineno">   36</span> </div>
+<div class="line"><span class="lineno">   37</span>    }</div>
+<div class="line"><span class="lineno">   38</span>}</div>
+<div class="ttc" id="aglobals_8h_html_a8461b3a410154ab32febdbde183d5945"><div class="ttname"><a href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a></div><div class="ttdeci">float jumpSpd</div><div class="ttdoc">The vertical speed of the player when jumping.</div><div class="ttdef"><b>Definition</b> <a href="globals_8c_source.html#l00004">globals.c:4</a></div></div>
+<div class="ttc" id="aplatforms_8c_html_a1f84d28d64bffb7729a9e9ab6b9dca39"><div class="ttname"><a href="platforms_8c.html#a1f84d28d64bffb7729a9e9ab6b9dca39">platformUpdate</a></div><div class="ttdeci">void platformUpdate(Vector2 *platform, Vector2 platformSize, float *start, float gap)</div><div class="ttdoc">Updates the values of a single platform.</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00018">platforms.c:18</a></div></div>
+<div class="ttc" id="autils_8h_html_aef5ffaf7bd00a1ba72c41d4e949437a3"><div class="ttname"><a href="utils_8h.html#aef5ffaf7bd00a1ba72c41d4e949437a3">rectangle</a></div><div class="ttdeci">static Rectangle rectangle(float x, float y, float width, float height)</div><div class="ttdoc">Rectangle constructor.</div><div class="ttdef"><b>Definition</b> <a href="utils_8h_source.html#l00025">utils.h:25</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -226,12 +228,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="platforms_8c_source.html#l00011">11</a> of file <a class="el" href="platforms_8c_source.html">platforms.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   11</span>                                                               {</div>
-<div class="line"><span class="lineno">   12</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 5; i++) {</div>
-<div class="line"><span class="lineno">   13</span>        DrawRectangleV(platforms[i], platformSize, PURPLE);</div>
-<div class="line"><span class="lineno">   14</span>    }</div>
-<div class="line"><span class="lineno">   15</span>}</div>
+<p class="definition">Definition at line <a class="el" href="platforms_8c_source.html#l00012">12</a> of file <a class="el" href="platforms_8c_source.html">platforms.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   12</span>                                                               {</div>
+<div class="line"><span class="lineno">   13</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 5; i++) {</div>
+<div class="line"><span class="lineno">   14</span>        DrawRectangleV(platforms[i], platformSize, PURPLE);</div>
+<div class="line"><span class="lineno">   15</span>    }</div>
+<div class="line"><span class="lineno">   16</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -259,15 +261,15 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="platforms_8c_source.html#l00039">39</a> of file <a class="el" href="platforms_8c_source.html">platforms.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   39</span>                                            {</div>
-<div class="line"><span class="lineno">   40</span>    <span class="keywordtype">int</span> start = 170;</div>
-<div class="line"><span class="lineno">   41</span>    <span class="keywordtype">int</span> gap = 16;</div>
-<div class="line"><span class="lineno">   42</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 5; i++) {</div>
-<div class="line"><span class="lineno">   43</span>        DrawText(TextFormat(<span class="stringliteral">&quot;%d\t\t%.0f\t\t%.0f&quot;</span>, i, platforms[i].x, platforms[i].y), 10, start, 20, WHITE);</div>
-<div class="line"><span class="lineno">   44</span>        start += gap;</div>
-<div class="line"><span class="lineno">   45</span>    }</div>
-<div class="line"><span class="lineno">   46</span>}</div>
+<p class="definition">Definition at line <a class="el" href="platforms_8c_source.html#l00040">40</a> of file <a class="el" href="platforms_8c_source.html">platforms.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   40</span>                                            {</div>
+<div class="line"><span class="lineno">   41</span>    <span class="keywordtype">int</span> start = 170;</div>
+<div class="line"><span class="lineno">   42</span>    <span class="keywordtype">int</span> gap = 16;</div>
+<div class="line"><span class="lineno">   43</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 5; i++) {</div>
+<div class="line"><span class="lineno">   44</span>        DrawText(TextFormat(<span class="stringliteral">&quot;%d\t\t%.0f\t\t%.0f&quot;</span>, i, platforms[i].x, platforms[i].y), 10, start, 20, WHITE);</div>
+<div class="line"><span class="lineno">   45</span>        start += gap;</div>
+<div class="line"><span class="lineno">   46</span>    }</div>
+<div class="line"><span class="lineno">   47</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -320,14 +322,15 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="platforms_8c_source.html#l00004">4</a> of file <a class="el" href="platforms_8c_source.html">platforms.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    4</span>                                                                                        {</div>
-<div class="line"><span class="lineno">    5</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 5; i++) {</div>
-<div class="line"><span class="lineno">    6</span>        platforms[i] = (Vector2) {(float) GetRandomValue(0, <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> - platformSize.x), *start};</div>
-<div class="line"><span class="lineno">    7</span>        *start -= gap;</div>
-<div class="line"><span class="lineno">    8</span>    }</div>
-<div class="line"><span class="lineno">    9</span>}</div>
+<p class="definition">Definition at line <a class="el" href="platforms_8c_source.html#l00005">5</a> of file <a class="el" href="platforms_8c_source.html">platforms.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    5</span>                                                                                        {</div>
+<div class="line"><span class="lineno">    6</span>    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; 5; i++) {</div>
+<div class="line"><span class="lineno">    7</span>        platforms[i] = <a class="code hl_function" href="utils_8h.html#acd94a3c441e9aa275d6f49f0eb16765b">vector2</a>((<span class="keywordtype">float</span>) GetRandomValue(0, <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> - platformSize.x), *start);</div>
+<div class="line"><span class="lineno">    8</span>        *start -= gap;</div>
+<div class="line"><span class="lineno">    9</span>    }</div>
+<div class="line"><span class="lineno">   10</span>}</div>
 <div class="ttc" id="aglobals_8h_html_a241aeeb764887ae5e3de58b98f04b16d"><div class="ttname"><a href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a></div><div class="ttdeci">#define WIDTH</div><div class="ttdoc">The width of the game window in pixels.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00004">globals.h:4</a></div></div>
+<div class="ttc" id="autils_8h_html_acd94a3c441e9aa275d6f49f0eb16765b"><div class="ttname"><a href="utils_8h.html#acd94a3c441e9aa275d6f49f0eb16765b">vector2</a></div><div class="ttdeci">static Vector2 vector2(float x, float y)</div><div class="ttdoc">Vector2 constructor.</div><div class="ttdef"><b>Definition</b> <a href="utils_8h_source.html#l00012">utils.h:12</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -380,11 +383,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="platforms_8c_source.html#l00017">17</a> of file <a class="el" href="platforms_8c_source.html">platforms.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   17</span>                                                                                      {</div>
-<div class="line"><span class="lineno">   18</span>    *platform = (Vector2) {(float) GetRandomValue(0, <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> - platformSize.x), *start};</div>
-<div class="line"><span class="lineno">   19</span>    *start -= gap;</div>
-<div class="line"><span class="lineno">   20</span>}</div>
+<p class="definition">Definition at line <a class="el" href="platforms_8c_source.html#l00018">18</a> of file <a class="el" href="platforms_8c_source.html">platforms.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   18</span>                                                                                      {</div>
+<div class="line"><span class="lineno">   19</span>    *platform = <a class="code hl_function" href="utils_8h.html#acd94a3c441e9aa275d6f49f0eb16765b">vector2</a>((<span class="keywordtype">float</span>) GetRandomValue(0, <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> - platformSize.x), *start);</div>
+<div class="line"><span class="lineno">   20</span>    *start -= gap;</div>
+<div class="line"><span class="lineno">   21</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

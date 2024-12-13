@@ -80,6 +80,7 @@ $(function() {
 <code>#include &quot;<a class="el" href="globals_8h_source.html">globals.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="player_8h_source.html">player.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="platforms_8h_source.html">platforms.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
 </div>
 <p><a href="main_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -105,145 +106,147 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00007">7</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    7</span>               {</div>
-<div class="line"><span class="lineno">    8</span> </div>
-<div class="line"><span class="lineno">    9</span>    <span class="comment">// raylib</span></div>
-<div class="line"><span class="lineno">   10</span>    SetTraceLogLevel(LOG_WARNING);</div>
-<div class="line"><span class="lineno">   11</span>    InitWindow(<a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>, <a class="code hl_define" href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a>, <span class="stringliteral">&quot;Jump Thingy&quot;</span>);</div>
-<div class="line"><span class="lineno">   12</span> </div>
-<div class="line"><span class="lineno">   13</span>    <span class="comment">// player</span></div>
-<div class="line"><span class="lineno">   14</span>    Vector2 player = {30, 40};</div>
-<div class="line"><span class="lineno">   15</span>    Vector2 pos = {(float) <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> / 2, 800};</div>
-<div class="line"><span class="lineno">   16</span>    Vector2 velocity = Vector2Zero();</div>
-<div class="line"><span class="lineno">   17</span>    Rectangle playerPointColl;</div>
-<div class="line"><span class="lineno">   18</span>    <span class="keywordtype">float</span> mass = 1.0f;</div>
-<div class="line"><span class="lineno">   19</span> </div>
-<div class="line"><span class="lineno">   20</span>    <span class="comment">// camera</span></div>
-<div class="line"><span class="lineno">   21</span>    Vector2 center = {(float) <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> / 2, (<span class="keywordtype">float</span>) <a class="code hl_define" href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a> / 2};</div>
-<div class="line"><span class="lineno">   22</span>    Camera2D camera = { 0 };</div>
-<div class="line"><span class="lineno">   23</span>    camera.zoom = 1.0f;</div>
-<div class="line"><span class="lineno">   24</span>    camera.offset = center;</div>
-<div class="line"><span class="lineno">   25</span>    Vector2 target = center;</div>
-<div class="line"><span class="lineno">   26</span> </div>
-<div class="line"><span class="lineno">   27</span>    <span class="comment">// game</span></div>
-<div class="line"><span class="lineno">   28</span>    <span class="keywordtype">float</span> timestep = 0.0f;</div>
-<div class="line"><span class="lineno">   29</span>    Rectangle ground = {0, 800, <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>, <a class="code hl_define" href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a>};</div>
-<div class="line"><span class="lineno">   30</span> </div>
-<div class="line"><span class="lineno">   31</span>    <span class="comment">// platforms</span></div>
-<div class="line"><span class="lineno">   32</span>    Vector2 platforms [5];</div>
-<div class="line"><span class="lineno">   33</span>    Vector2 platformSize = {80, 10};</div>
-<div class="line"><span class="lineno">   34</span>    <span class="keywordtype">float</span> platformStart = 550.0f;</div>
-<div class="line"><span class="lineno">   35</span>    <span class="keywordtype">float</span> platformGap = 250.0f;</div>
-<div class="line"><span class="lineno">   36</span>    Rectangle killZone = {-<a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>, <a class="code hl_define" href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a>, 2 *<a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>, 200.0f};</div>
-<div class="line"><span class="lineno">   37</span>    <a class="code hl_function" href="platforms_8h.html#a52d7492c0788729233f592368beb9f71">platformsInit</a>(platforms, platformSize, &amp;platformStart, platformGap);</div>
-<div class="line"><span class="lineno">   38</span> </div>
-<div class="line"><span class="lineno">   39</span>    <span class="comment">// game loop</span></div>
-<div class="line"><span class="lineno">   40</span>    <span class="keywordflow">while</span>(!WindowShouldClose()) {</div>
-<div class="line"><span class="lineno">   41</span> </div>
-<div class="line"><span class="lineno">   42</span>        <span class="comment">// input</span></div>
-<div class="line"><span class="lineno">   43</span>        <span class="keywordflow">if</span> (IsKeyDown(KEY_A))</div>
-<div class="line"><span class="lineno">   44</span>            velocity.x = -<a class="code hl_variable" href="globals_8h.html#a79e87309ea4ea5f45f8c579ac955ecad">moveSpd</a>;</div>
-<div class="line"><span class="lineno">   45</span>        <span class="keywordflow">if</span> (IsKeyDown(KEY_D))</div>
-<div class="line"><span class="lineno">   46</span>            velocity.x = <a class="code hl_variable" href="globals_8h.html#a79e87309ea4ea5f45f8c579ac955ecad">moveSpd</a>;</div>
-<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">if</span> (IsKeyDown(KEY_S)) {</div>
-<div class="line"><span class="lineno">   48</span>            velocity.x -= velocity.x * 8 * timestep;</div>
-<div class="line"><span class="lineno">   49</span>            <span class="keywordflow">if</span> (velocity.y &gt; 0.0f)</div>
-<div class="line"><span class="lineno">   50</span>                velocity.y += velocity.y * 4 * timestep;</div>
-<div class="line"><span class="lineno">   51</span>        }</div>
-<div class="line"><span class="lineno">   52</span> </div>
-<div class="line"><span class="lineno">   53</span><span class="preprocessor">#if DEBUG</span></div>
-<div class="line"><span class="lineno">   54</span>        <span class="keywordflow">if</span> (IsKeyDown(KEY_C))</div>
-<div class="line"><span class="lineno">   55</span>            pos = (Vector2) {(float) <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> / 2, 800};</div>
-<div class="line"><span class="lineno">   56</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">   57</span> </div>
-<div class="line"><span class="lineno">   58</span> </div>
-<div class="line"><span class="lineno">   59</span>        <span class="comment">// calculate player velocity</span></div>
-<div class="line"><span class="lineno">   60</span>        <a class="code hl_function" href="player_8h.html#a276972060943b8470ffb46ac9ddfd1a5">playerGetVelocity</a>(&amp;pos, &amp;velocity, mass, timestep);</div>
-<div class="line"><span class="lineno">   61</span> </div>
-<div class="line"><span class="lineno">   62</span> </div>
-<div class="line"><span class="lineno">   63</span>        <span class="comment">// handle off-screen</span></div>
-<div class="line"><span class="lineno">   64</span>        <span class="keywordflow">if</span> (pos.x &gt; <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>) pos.x -= <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>;</div>
-<div class="line"><span class="lineno">   65</span>        <span class="keywordflow">if</span> (pos.x + player.x &lt; 0) pos.x += <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>;</div>
-<div class="line"><span class="lineno">   66</span> </div>
-<div class="line"><span class="lineno">   67</span> </div>
-<div class="line"><span class="lineno">   68</span>        <span class="comment">// set camera target</span></div>
-<div class="line"><span class="lineno">   69</span>        target.y = target.y - 200.0f &gt; pos.y ? pos.y + 200.0f : target.y;</div>
-<div class="line"><span class="lineno">   70</span>        camera.target = target;</div>
-<div class="line"><span class="lineno">   71</span> </div>
-<div class="line"><span class="lineno">   72</span> </div>
-<div class="line"><span class="lineno">   73</span>        <span class="comment">// update kill zone</span></div>
-<div class="line"><span class="lineno">   74</span>        killZone.y = target.y + center.y;</div>
-<div class="line"><span class="lineno">   75</span> </div>
-<div class="line"><span class="lineno">   76</span> </div>
-<div class="line"><span class="lineno">   77</span>        <span class="comment">// get player hit-box and check collisions</span></div>
-<div class="line"><span class="lineno">   78</span>        playerPointColl = (Rectangle) {pos.x, pos.y + player.y - 1, player.x, 1};</div>
-<div class="line"><span class="lineno">   79</span> </div>
-<div class="line"><span class="lineno">   80</span>        <span class="keywordflow">if</span> (CheckCollisionRecs(playerPointColl, ground))</div>
-<div class="line"><span class="lineno">   81</span>            velocity.y = <a class="code hl_variable" href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a>;</div>
-<div class="line"><span class="lineno">   82</span> </div>
-<div class="line"><span class="lineno">   83</span>        <a class="code hl_function" href="platforms_8h.html#a429c7cfd5c46fe565f2a29c010740b13">platformsCheckCollision</a>(platforms, platformSize, playerPointColl, killZone,</div>
-<div class="line"><span class="lineno">   84</span>                                &amp;velocity, &amp;platformStart, platformGap);</div>
-<div class="line"><span class="lineno">   85</span> </div>
-<div class="line"><span class="lineno">   86</span> </div>
-<div class="line"><span class="lineno">   87</span>        <span class="comment">// check game over or reset</span></div>
-<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">if</span> (CheckCollisionPointRec(pos, killZone) || IsKeyPressed(KEY_R)) {</div>
-<div class="line"><span class="lineno">   89</span>            <span class="comment">// reset player params</span></div>
-<div class="line"><span class="lineno">   90</span>            velocity = Vector2Zero();</div>
-<div class="line"><span class="lineno">   91</span>            pos = (Vector2) {(float) <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> / 2, 800};</div>
-<div class="line"><span class="lineno">   92</span> </div>
-<div class="line"><span class="lineno">   93</span>            <span class="comment">// reset camera target</span></div>
-<div class="line"><span class="lineno">   94</span>            target = center;</div>
-<div class="line"><span class="lineno">   95</span> </div>
-<div class="line"><span class="lineno">   96</span>            <span class="comment">// reset platforms params</span></div>
-<div class="line"><span class="lineno">   97</span>            platformStart = 550.0f;</div>
-<div class="line"><span class="lineno">   98</span>            <a class="code hl_function" href="platforms_8h.html#a52d7492c0788729233f592368beb9f71">platformsInit</a>(platforms, platformSize, &amp;platformStart, platformGap);</div>
-<div class="line"><span class="lineno">   99</span>        }</div>
-<div class="line"><span class="lineno">  100</span> </div>
-<div class="line"><span class="lineno">  101</span> </div>
-<div class="line"><span class="lineno">  102</span>        BeginDrawing();</div>
+<p class="definition">Definition at line <a class="el" href="main_8c_source.html#l00009">9</a> of file <a class="el" href="main_8c_source.html">main.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">    9</span>               {</div>
+<div class="line"><span class="lineno">   10</span> </div>
+<div class="line"><span class="lineno">   11</span>    <span class="comment">// raylib</span></div>
+<div class="line"><span class="lineno">   12</span>    SetTraceLogLevel(LOG_WARNING);</div>
+<div class="line"><span class="lineno">   13</span>    InitWindow(<a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>, <a class="code hl_define" href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a>, <span class="stringliteral">&quot;Jump Thingy&quot;</span>);</div>
+<div class="line"><span class="lineno">   14</span> </div>
+<div class="line"><span class="lineno">   15</span>    <span class="comment">// player</span></div>
+<div class="line"><span class="lineno">   16</span>    Vector2 player = {30, 40};</div>
+<div class="line"><span class="lineno">   17</span>    Vector2 pos = {(float) <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> / 2, 800};</div>
+<div class="line"><span class="lineno">   18</span>    Vector2 velocity = Vector2Zero();</div>
+<div class="line"><span class="lineno">   19</span>    Rectangle playerPointColl;</div>
+<div class="line"><span class="lineno">   20</span>    <span class="keywordtype">float</span> mass = 1.0f;</div>
+<div class="line"><span class="lineno">   21</span> </div>
+<div class="line"><span class="lineno">   22</span>    <span class="comment">// camera</span></div>
+<div class="line"><span class="lineno">   23</span>    Vector2 center = {(float) <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> / 2, (<span class="keywordtype">float</span>) <a class="code hl_define" href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a> / 2};</div>
+<div class="line"><span class="lineno">   24</span>    Camera2D camera = { 0 };</div>
+<div class="line"><span class="lineno">   25</span>    camera.zoom = 1.0f;</div>
+<div class="line"><span class="lineno">   26</span>    camera.offset = center;</div>
+<div class="line"><span class="lineno">   27</span>    Vector2 target = center;</div>
+<div class="line"><span class="lineno">   28</span> </div>
+<div class="line"><span class="lineno">   29</span>    <span class="comment">// game</span></div>
+<div class="line"><span class="lineno">   30</span>    <span class="keywordtype">float</span> timestep = 0.0f;</div>
+<div class="line"><span class="lineno">   31</span>    Rectangle ground = {0, 800, <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>, <a class="code hl_define" href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a>};</div>
+<div class="line"><span class="lineno">   32</span> </div>
+<div class="line"><span class="lineno">   33</span>    <span class="comment">// platforms</span></div>
+<div class="line"><span class="lineno">   34</span>    Vector2 platforms [5];</div>
+<div class="line"><span class="lineno">   35</span>    Vector2 platformSize = {80, 10};</div>
+<div class="line"><span class="lineno">   36</span>    <span class="keywordtype">float</span> platformStart = 550.0f;</div>
+<div class="line"><span class="lineno">   37</span>    <span class="keywordtype">float</span> platformGap = 250.0f;</div>
+<div class="line"><span class="lineno">   38</span>    Rectangle killZone = {-<a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>, <a class="code hl_define" href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a>, 2 *<a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>, 200.0f};</div>
+<div class="line"><span class="lineno">   39</span>    <a class="code hl_function" href="platforms_8h.html#a52d7492c0788729233f592368beb9f71">platformsInit</a>(platforms, platformSize, &amp;platformStart, platformGap);</div>
+<div class="line"><span class="lineno">   40</span> </div>
+<div class="line"><span class="lineno">   41</span>    <span class="comment">// game loop</span></div>
+<div class="line"><span class="lineno">   42</span>    <span class="keywordflow">while</span>(!WindowShouldClose()) {</div>
+<div class="line"><span class="lineno">   43</span> </div>
+<div class="line"><span class="lineno">   44</span>        <span class="comment">// input</span></div>
+<div class="line"><span class="lineno">   45</span>        <span class="keywordflow">if</span> (IsKeyDown(KEY_A))</div>
+<div class="line"><span class="lineno">   46</span>            velocity.x = -<a class="code hl_variable" href="globals_8h.html#a79e87309ea4ea5f45f8c579ac955ecad">moveSpd</a>;</div>
+<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">if</span> (IsKeyDown(KEY_D))</div>
+<div class="line"><span class="lineno">   48</span>            velocity.x = <a class="code hl_variable" href="globals_8h.html#a79e87309ea4ea5f45f8c579ac955ecad">moveSpd</a>;</div>
+<div class="line"><span class="lineno">   49</span>        <span class="keywordflow">if</span> (IsKeyDown(KEY_S)) {</div>
+<div class="line"><span class="lineno">   50</span>            velocity.x -= velocity.x * 8 * timestep;</div>
+<div class="line"><span class="lineno">   51</span>            <span class="keywordflow">if</span> (velocity.y &gt; 0.0f)</div>
+<div class="line"><span class="lineno">   52</span>                velocity.y += velocity.y * 4 * timestep;</div>
+<div class="line"><span class="lineno">   53</span>        }</div>
+<div class="line"><span class="lineno">   54</span> </div>
+<div class="line"><span class="lineno">   55</span><span class="preprocessor">#if DEBUG</span></div>
+<div class="line"><span class="lineno">   56</span>        <span class="keywordflow">if</span> (IsKeyDown(KEY_C))</div>
+<div class="line"><span class="lineno">   57</span>            pos = <a class="code hl_function" href="utils_8h.html#acd94a3c441e9aa275d6f49f0eb16765b">vector2</a>((<span class="keywordtype">float</span>) <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> / 2, 800);</div>
+<div class="line"><span class="lineno">   58</span><span class="preprocessor">#endif</span></div>
+<div class="line"><span class="lineno">   59</span> </div>
+<div class="line"><span class="lineno">   60</span> </div>
+<div class="line"><span class="lineno">   61</span>        <span class="comment">// calculate player velocity</span></div>
+<div class="line"><span class="lineno">   62</span>        <a class="code hl_function" href="player_8h.html#a276972060943b8470ffb46ac9ddfd1a5">playerGetVelocity</a>(&amp;pos, &amp;velocity, mass, timestep);</div>
+<div class="line"><span class="lineno">   63</span> </div>
+<div class="line"><span class="lineno">   64</span> </div>
+<div class="line"><span class="lineno">   65</span>        <span class="comment">// handle off-screen</span></div>
+<div class="line"><span class="lineno">   66</span>        <span class="keywordflow">if</span> (pos.x &gt; <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>) pos.x -= <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>;</div>
+<div class="line"><span class="lineno">   67</span>        <span class="keywordflow">if</span> (pos.x + player.x &lt; 0) pos.x += <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a>;</div>
+<div class="line"><span class="lineno">   68</span> </div>
+<div class="line"><span class="lineno">   69</span> </div>
+<div class="line"><span class="lineno">   70</span>        <span class="comment">// set camera target</span></div>
+<div class="line"><span class="lineno">   71</span>        target.y = target.y - 200.0f &gt; pos.y ? pos.y + 200.0f : target.y;</div>
+<div class="line"><span class="lineno">   72</span>        camera.target = target;</div>
+<div class="line"><span class="lineno">   73</span> </div>
+<div class="line"><span class="lineno">   74</span> </div>
+<div class="line"><span class="lineno">   75</span>        <span class="comment">// update kill zone</span></div>
+<div class="line"><span class="lineno">   76</span>        killZone.y = target.y + center.y;</div>
+<div class="line"><span class="lineno">   77</span> </div>
+<div class="line"><span class="lineno">   78</span> </div>
+<div class="line"><span class="lineno">   79</span>        <span class="comment">// get player hit-box and check collisions</span></div>
+<div class="line"><span class="lineno">   80</span>        playerPointColl = <a class="code hl_function" href="utils_8h.html#aef5ffaf7bd00a1ba72c41d4e949437a3">rectangle</a>(pos.x, pos.y + player.y - 1, player.x, 1);</div>
+<div class="line"><span class="lineno">   81</span> </div>
+<div class="line"><span class="lineno">   82</span>        <span class="keywordflow">if</span> (CheckCollisionRecs(playerPointColl, ground))</div>
+<div class="line"><span class="lineno">   83</span>            velocity.y = <a class="code hl_variable" href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a>;</div>
+<div class="line"><span class="lineno">   84</span> </div>
+<div class="line"><span class="lineno">   85</span>        <a class="code hl_function" href="platforms_8h.html#a429c7cfd5c46fe565f2a29c010740b13">platformsCheckCollision</a>(platforms, platformSize, playerPointColl, killZone,</div>
+<div class="line"><span class="lineno">   86</span>                                &amp;velocity, &amp;platformStart, platformGap);</div>
+<div class="line"><span class="lineno">   87</span> </div>
+<div class="line"><span class="lineno">   88</span> </div>
+<div class="line"><span class="lineno">   89</span>        <span class="comment">// check game over or reset</span></div>
+<div class="line"><span class="lineno">   90</span>        <span class="keywordflow">if</span> (CheckCollisionPointRec(pos, killZone) || IsKeyPressed(KEY_R)) {</div>
+<div class="line"><span class="lineno">   91</span>            <span class="comment">// reset player params</span></div>
+<div class="line"><span class="lineno">   92</span>            velocity = Vector2Zero();</div>
+<div class="line"><span class="lineno">   93</span>            pos = <a class="code hl_function" href="utils_8h.html#acd94a3c441e9aa275d6f49f0eb16765b">vector2</a>((<span class="keywordtype">float</span>) <a class="code hl_define" href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a> / 2, 800);</div>
+<div class="line"><span class="lineno">   94</span> </div>
+<div class="line"><span class="lineno">   95</span>            <span class="comment">// reset camera target</span></div>
+<div class="line"><span class="lineno">   96</span>            target = center;</div>
+<div class="line"><span class="lineno">   97</span> </div>
+<div class="line"><span class="lineno">   98</span>            <span class="comment">// reset platforms params</span></div>
+<div class="line"><span class="lineno">   99</span>            platformStart = 550.0f;</div>
+<div class="line"><span class="lineno">  100</span>            <a class="code hl_function" href="platforms_8h.html#a52d7492c0788729233f592368beb9f71">platformsInit</a>(platforms, platformSize, &amp;platformStart, platformGap);</div>
+<div class="line"><span class="lineno">  101</span>        }</div>
+<div class="line"><span class="lineno">  102</span> </div>
 <div class="line"><span class="lineno">  103</span> </div>
-<div class="line"><span class="lineno">  104</span>            ClearBackground(SKYBLUE);</div>
+<div class="line"><span class="lineno">  104</span>        BeginDrawing();</div>
 <div class="line"><span class="lineno">  105</span> </div>
-<div class="line"><span class="lineno">  106</span>            BeginMode2D(camera);</div>
+<div class="line"><span class="lineno">  106</span>            ClearBackground(SKYBLUE);</div>
 <div class="line"><span class="lineno">  107</span> </div>
-<div class="line"><span class="lineno">  108</span>                <span class="comment">// draw game scene</span></div>
-<div class="line"><span class="lineno">  109</span>                DrawRectangleRec(ground, DARKGREEN);</div>
-<div class="line"><span class="lineno">  110</span>                <a class="code hl_function" href="platforms_8h.html#a27a9c0e83f6ba9dc75942dd30b4605b9">platformsDraw</a>(platforms, platformSize);</div>
-<div class="line"><span class="lineno">  111</span> </div>
-<div class="line"><span class="lineno">  112</span>                <span class="comment">// draw player</span></div>
-<div class="line"><span class="lineno">  113</span>                DrawRectangleV(pos, player, RED);</div>
-<div class="line"><span class="lineno">  114</span>                <a class="code hl_function" href="player_8h.html#a4b1aabfa2218920432f30cf45813400c">playerDrawOutScreen</a>(pos, player, RED);</div>
-<div class="line"><span class="lineno">  115</span> </div>
-<div class="line"><span class="lineno">  116</span>            EndMode2D();</div>
+<div class="line"><span class="lineno">  108</span>            BeginMode2D(camera);</div>
+<div class="line"><span class="lineno">  109</span> </div>
+<div class="line"><span class="lineno">  110</span>                <span class="comment">// draw game scene</span></div>
+<div class="line"><span class="lineno">  111</span>                DrawRectangleRec(ground, DARKGREEN);</div>
+<div class="line"><span class="lineno">  112</span>                <a class="code hl_function" href="platforms_8h.html#a27a9c0e83f6ba9dc75942dd30b4605b9">platformsDraw</a>(platforms, platformSize);</div>
+<div class="line"><span class="lineno">  113</span> </div>
+<div class="line"><span class="lineno">  114</span>                <span class="comment">// draw player</span></div>
+<div class="line"><span class="lineno">  115</span>                DrawRectangleV(pos, player, RED);</div>
+<div class="line"><span class="lineno">  116</span>                <a class="code hl_function" href="player_8h.html#a4b1aabfa2218920432f30cf45813400c">playerDrawOutScreen</a>(pos, player, RED);</div>
 <div class="line"><span class="lineno">  117</span> </div>
-<div class="line"><span class="lineno">  118</span>            DrawText(TextFormat(<span class="stringliteral">&quot;POS\n%.2f\n%.2f\n\nVEL\n%.2f\n%.2f&quot;</span>, pos.x, pos.y, velocity.x, velocity.y), 10, 10, 20, WHITE);</div>
+<div class="line"><span class="lineno">  118</span>            EndMode2D();</div>
 <div class="line"><span class="lineno">  119</span> </div>
-<div class="line"><span class="lineno">  120</span><span class="preprocessor">#if DEBUG</span></div>
-<div class="line"><span class="lineno">  121</span>            <a class="code hl_function" href="platforms_8h.html#ae9f1d75c4e97deb9774c4864ef431fb6">platformsDrawPos</a>(platforms);</div>
-<div class="line"><span class="lineno">  122</span><span class="preprocessor">#endif</span></div>
-<div class="line"><span class="lineno">  123</span> </div>
-<div class="line"><span class="lineno">  124</span>            DrawFPS(10, <a class="code hl_define" href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a> - 30);</div>
+<div class="line"><span class="lineno">  120</span>            DrawText(TextFormat(<span class="stringliteral">&quot;POS\n%.2f\n%.2f\n\nVEL\n%.2f\n%.2f&quot;</span>, pos.x, pos.y, velocity.x, velocity.y), 10, 10, 20, WHITE);</div>
+<div class="line"><span class="lineno">  121</span> </div>
+<div class="line"><span class="lineno">  122</span><span class="preprocessor">#if DEBUG</span></div>
+<div class="line"><span class="lineno">  123</span>            <a class="code hl_function" href="platforms_8h.html#ae9f1d75c4e97deb9774c4864ef431fb6">platformsDrawPos</a>(platforms);</div>
+<div class="line"><span class="lineno">  124</span><span class="preprocessor">#endif</span></div>
 <div class="line"><span class="lineno">  125</span> </div>
-<div class="line"><span class="lineno">  126</span>        EndDrawing();</div>
-<div class="line"><span class="lineno">  127</span>        timestep = GetFrameTime();</div>
-<div class="line"><span class="lineno">  128</span> </div>
-<div class="line"><span class="lineno">  129</span>    }</div>
+<div class="line"><span class="lineno">  126</span>            DrawFPS(10, <a class="code hl_define" href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a> - 30);</div>
+<div class="line"><span class="lineno">  127</span> </div>
+<div class="line"><span class="lineno">  128</span>        EndDrawing();</div>
+<div class="line"><span class="lineno">  129</span>        timestep = GetFrameTime();</div>
 <div class="line"><span class="lineno">  130</span> </div>
-<div class="line"><span class="lineno">  131</span>    CloseWindow();</div>
+<div class="line"><span class="lineno">  131</span>    }</div>
 <div class="line"><span class="lineno">  132</span> </div>
-<div class="line"><span class="lineno">  133</span>    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">  134</span>}</div>
+<div class="line"><span class="lineno">  133</span>    CloseWindow();</div>
+<div class="line"><span class="lineno">  134</span> </div>
+<div class="line"><span class="lineno">  135</span>    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">  136</span>}</div>
 <div class="ttc" id="aglobals_8h_html_a241aeeb764887ae5e3de58b98f04b16d"><div class="ttname"><a href="globals_8h.html#a241aeeb764887ae5e3de58b98f04b16d">WIDTH</a></div><div class="ttdeci">#define WIDTH</div><div class="ttdoc">The width of the game window in pixels.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00004">globals.h:4</a></div></div>
-<div class="ttc" id="aglobals_8h_html_a79e87309ea4ea5f45f8c579ac955ecad"><div class="ttname"><a href="globals_8h.html#a79e87309ea4ea5f45f8c579ac955ecad">moveSpd</a></div><div class="ttdeci">static float moveSpd</div><div class="ttdoc">The horizontal movement speed of the player.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00020">globals.h:20</a></div></div>
-<div class="ttc" id="aglobals_8h_html_a8461b3a410154ab32febdbde183d5945"><div class="ttname"><a href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a></div><div class="ttdeci">static float jumpSpd</div><div class="ttdoc">The vertical speed of the player when jumping.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00019">globals.h:19</a></div></div>
+<div class="ttc" id="aglobals_8h_html_a79e87309ea4ea5f45f8c579ac955ecad"><div class="ttname"><a href="globals_8h.html#a79e87309ea4ea5f45f8c579ac955ecad">moveSpd</a></div><div class="ttdeci">float moveSpd</div><div class="ttdoc">The horizontal movement speed of the player.</div><div class="ttdef"><b>Definition</b> <a href="globals_8c_source.html#l00005">globals.c:5</a></div></div>
+<div class="ttc" id="aglobals_8h_html_a8461b3a410154ab32febdbde183d5945"><div class="ttname"><a href="globals_8h.html#a8461b3a410154ab32febdbde183d5945">jumpSpd</a></div><div class="ttdeci">float jumpSpd</div><div class="ttdoc">The vertical speed of the player when jumping.</div><div class="ttdef"><b>Definition</b> <a href="globals_8c_source.html#l00004">globals.c:4</a></div></div>
 <div class="ttc" id="aglobals_8h_html_aed89bd71aee8be823e8a20ec4e093c1e"><div class="ttname"><a href="globals_8h.html#aed89bd71aee8be823e8a20ec4e093c1e">HEIGHT</a></div><div class="ttdeci">#define HEIGHT</div><div class="ttdoc">The height of the game window in pixels.</div><div class="ttdef"><b>Definition</b> <a href="globals_8h_source.html#l00005">globals.h:5</a></div></div>
-<div class="ttc" id="aplatforms_8h_html_a27a9c0e83f6ba9dc75942dd30b4605b9"><div class="ttname"><a href="platforms_8h.html#a27a9c0e83f6ba9dc75942dd30b4605b9">platformsDraw</a></div><div class="ttdeci">void platformsDraw(Vector2 platforms[5], Vector2 platformSize)</div><div class="ttdoc">Draws all the platforms in the array.</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00011">platforms.c:11</a></div></div>
-<div class="ttc" id="aplatforms_8h_html_a429c7cfd5c46fe565f2a29c010740b13"><div class="ttname"><a href="platforms_8h.html#a429c7cfd5c46fe565f2a29c010740b13">platformsCheckCollision</a></div><div class="ttdeci">void platformsCheckCollision(Vector2 platforms[5], Vector2 platformSize, Rectangle playerPointColl, Rectangle killZone, Vector2 *velocity, float *start, float gap)</div><div class="ttdoc">Checks for collisions between the player's hit-box, each platform, and the kill zone.</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00022">platforms.c:22</a></div></div>
-<div class="ttc" id="aplatforms_8h_html_a52d7492c0788729233f592368beb9f71"><div class="ttname"><a href="platforms_8h.html#a52d7492c0788729233f592368beb9f71">platformsInit</a></div><div class="ttdeci">void platformsInit(Vector2 platforms[5], Vector2 platformSize, float *start, float gap)</div><div class="ttdoc">Initialize the platforms array with random values, starting at start and decrementing by gap for each...</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00004">platforms.c:4</a></div></div>
-<div class="ttc" id="aplatforms_8h_html_ae9f1d75c4e97deb9774c4864ef431fb6"><div class="ttname"><a href="platforms_8h.html#ae9f1d75c4e97deb9774c4864ef431fb6">platformsDrawPos</a></div><div class="ttdeci">void platformsDrawPos(Vector2 platforms[5])</div><div class="ttdoc">Draws the platforms positions on the screen.</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00039">platforms.c:39</a></div></div>
+<div class="ttc" id="aplatforms_8h_html_a27a9c0e83f6ba9dc75942dd30b4605b9"><div class="ttname"><a href="platforms_8h.html#a27a9c0e83f6ba9dc75942dd30b4605b9">platformsDraw</a></div><div class="ttdeci">void platformsDraw(Vector2 platforms[5], Vector2 platformSize)</div><div class="ttdoc">Draws all the platforms in the array.</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00012">platforms.c:12</a></div></div>
+<div class="ttc" id="aplatforms_8h_html_a429c7cfd5c46fe565f2a29c010740b13"><div class="ttname"><a href="platforms_8h.html#a429c7cfd5c46fe565f2a29c010740b13">platformsCheckCollision</a></div><div class="ttdeci">void platformsCheckCollision(Vector2 platforms[5], Vector2 platformSize, Rectangle playerPointColl, Rectangle killZone, Vector2 *velocity, float *start, float gap)</div><div class="ttdoc">Checks for collisions between the player's hit-box, each platform, and the kill zone.</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00023">platforms.c:23</a></div></div>
+<div class="ttc" id="aplatforms_8h_html_a52d7492c0788729233f592368beb9f71"><div class="ttname"><a href="platforms_8h.html#a52d7492c0788729233f592368beb9f71">platformsInit</a></div><div class="ttdeci">void platformsInit(Vector2 platforms[5], Vector2 platformSize, float *start, float gap)</div><div class="ttdoc">Initialize the platforms array with random values, starting at start and decrementing by gap for each...</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00005">platforms.c:5</a></div></div>
+<div class="ttc" id="aplatforms_8h_html_ae9f1d75c4e97deb9774c4864ef431fb6"><div class="ttname"><a href="platforms_8h.html#ae9f1d75c4e97deb9774c4864ef431fb6">platformsDrawPos</a></div><div class="ttdeci">void platformsDrawPos(Vector2 platforms[5])</div><div class="ttdoc">Draws the platforms positions on the screen.</div><div class="ttdef"><b>Definition</b> <a href="platforms_8c_source.html#l00040">platforms.c:40</a></div></div>
 <div class="ttc" id="aplayer_8h_html_a276972060943b8470ffb46ac9ddfd1a5"><div class="ttname"><a href="player_8h.html#a276972060943b8470ffb46ac9ddfd1a5">playerGetVelocity</a></div><div class="ttdeci">void playerGetVelocity(Vector2 *position, Vector2 *velocity, float mass, float timestep)</div><div class="ttdoc">Updates the player's position and velocity based on forces, gravity, and the provided timestep using ...</div><div class="ttdef"><b>Definition</b> <a href="player_8c_source.html#l00013">player.c:13</a></div></div>
 <div class="ttc" id="aplayer_8h_html_a4b1aabfa2218920432f30cf45813400c"><div class="ttname"><a href="player_8h.html#a4b1aabfa2218920432f30cf45813400c">playerDrawOutScreen</a></div><div class="ttdeci">void playerDrawOutScreen(Vector2 pos, Vector2 player, Color color)</div><div class="ttdoc">Draws the player's rectangle when it goes out of the screen bounds, wrapping it to the opposite side ...</div><div class="ttdef"><b>Definition</b> <a href="player_8c_source.html#l00004">player.c:4</a></div></div>
+<div class="ttc" id="autils_8h_html_acd94a3c441e9aa275d6f49f0eb16765b"><div class="ttname"><a href="utils_8h.html#acd94a3c441e9aa275d6f49f0eb16765b">vector2</a></div><div class="ttdeci">static Vector2 vector2(float x, float y)</div><div class="ttdoc">Vector2 constructor.</div><div class="ttdef"><b>Definition</b> <a href="utils_8h_source.html#l00012">utils.h:12</a></div></div>
+<div class="ttc" id="autils_8h_html_aef5ffaf7bd00a1ba72c41d4e949437a3"><div class="ttname"><a href="utils_8h.html#aef5ffaf7bd00a1ba72c41d4e949437a3">rectangle</a></div><div class="ttdeci">static Rectangle rectangle(float x, float y, float width, float height)</div><div class="ttdoc">Rectangle constructor.</div><div class="ttdef"><b>Definition</b> <a href="utils_8h_source.html#l00025">utils.h:25</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
