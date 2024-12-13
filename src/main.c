@@ -3,6 +3,8 @@
 #include "globals.h"
 #include "player.h"
 #include "platforms.h"
+#include "utils.h"
+
 
 int main(void) {
 
@@ -52,7 +54,7 @@ int main(void) {
 
 #if DEBUG
         if (IsKeyDown(KEY_C))
-            pos = (Vector2) {(float) WIDTH / 2, 800};
+            pos = vector2((float) WIDTH / 2, 800);
 #endif
 
 
@@ -75,7 +77,7 @@ int main(void) {
 
 
         // get player hit-box and check collisions
-        playerPointColl = (Rectangle) {pos.x, pos.y + player.y - 1, player.x, 1};
+        playerPointColl = rectangle(pos.x, pos.y + player.y - 1, player.x, 1);
 
         if (CheckCollisionRecs(playerPointColl, ground))
             velocity.y = jumpSpd;
@@ -88,7 +90,7 @@ int main(void) {
         if (CheckCollisionPointRec(pos, killZone) || IsKeyPressed(KEY_R)) {
             // reset player params
             velocity = Vector2Zero();
-            pos = (Vector2) {(float) WIDTH / 2, 800};
+            pos = vector2((float) WIDTH / 2, 800);
 
             // reset camera target
             target = center;

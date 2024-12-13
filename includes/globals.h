@@ -15,9 +15,9 @@
  */
 #define DEBUG 0
 
-static float gravity = -981.0f; ///< The gravitational force applied to the player.
-static float jumpSpd = -1000.0f; ///< The vertical speed of the player when jumping.
-static float moveSpd = 300.0f; ///< The horizontal movement speed of the player.
+extern float gravity; ///< The gravitational force applied to the player.
+extern float jumpSpd; ///< The vertical speed of the player when jumping.
+extern float moveSpd; ///< The horizontal movement speed of the player.
 
 
 #endif //GLOBALS_H
