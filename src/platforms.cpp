@@ -1,10 +1,9 @@
 #include "platforms.h"
 #include "globals.h"
-#include "utils.h"
 
 void platformsInit(Vector2 platforms[5], Vector2 platformSize, float *start, float gap) {
     for(int i = 0; i < 5; i++) {
-        platforms[i] = vector2((float) GetRandomValue(0, WIDTH - platformSize.x), *start);
+        platforms[i] = {(float) GetRandomValue(0,  Globals::WIDTH - (int) platformSize.x), *start};
         *start -= gap;
     }
 }
@@ -16,18 +15,18 @@ void platformsDraw(Vector2 platforms[5], Vector2 platformSize) {
 }
 
 void platformUpdate(Vector2 *platform, Vector2 platformSize, float *start, float gap) {
-    *platform = vector2((float) GetRandomValue(0, WIDTH - platformSize.x), *start);
+    *platform = {(float) GetRandomValue(0, Globals::WIDTH - (int) platformSize.x), *start};
     *start -= gap;
 }
 
 void platformsCheckCollision(Vector2 platforms[5], Vector2 platformSize, Rectangle playerPointColl, Rectangle killZone, Vector2 *velocity, float *start, float gap) {
     Rectangle platform;
     for(int i = 0; i < 5; i++) {
-        platform = rectangle(platforms[i].x, platforms[i].y, platformSize.x, platformSize.y);
+        platform = {platforms[i].x, platforms[i].y, platformSize.x, platformSize.y};
         if (CheckCollisionRecs(playerPointColl,
                                platform)
             && velocity->y > 0.0f) {
-            velocity->y = jumpSpd;
+            velocity->y = Globals::jumpSpd;
         }
         if (CheckCollisionRecs(killZone,
                                platform)) {

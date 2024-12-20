@@ -3,6 +3,19 @@
 
 #include <raylib.h>
 
+class Player {
+public:
+    Vector2 size{};
+    Vector2 pos{};
+    Vector2 velocity{};
+    Rectangle playerPointColl{};
+    float mass;
+
+    Player(Vector2 size, Vector2 pos, Vector2 velocity,
+           Rectangle playerPointColl, float mass);
+
+};
+
 /**
  * @brief Draws the player's rectangle when it goes out of the screen bounds,
  * wrapping it to the opposite side of the screen.

@@ -1,9 +1,6 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#define WIDTH 600 ///< The width of the game window in pixels.
-#define HEIGHT 900 ///< The height of the game window in pixels.
-
 /**
  * @brief Enables or disables Debug Mode.
  *
@@ -15,9 +12,13 @@
  */
 #define DEBUG 0
 
-extern float gravity; ///< The gravitational force applied to the player.
-extern float jumpSpd; ///< The vertical speed of the player when jumping.
-extern float moveSpd; ///< The horizontal movement speed of the player.
+namespace Globals {
+    constexpr int WIDTH = 600; ///< The width of the game window in pixels.
+    constexpr int HEIGHT = 900; ///< The height of the game window in pixels.
+    constexpr float gravity = -981.0f; ///< The gravitational force applied to the player.
+    constexpr float jumpSpd = -1000.0f; ///< The vertical speed of the player when jumping.
+    constexpr float moveSpd = 300.0f; ///< The horizontal movement speed of the player.
 
 
+}
 #endif //GLOBALS_H

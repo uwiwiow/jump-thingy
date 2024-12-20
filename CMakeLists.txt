@@ -1,20 +1,18 @@
 cmake_minimum_required(VERSION 3.29)
-project(jumpThingy C)
+project(jumpThingy CXX)
 
-set(CMAKE_C_STANDARD 23)
-set(CMAKE_C_FLAGS "-Wall -Wextra -pedantic")
+set(CMAKE_CXX_STANDARD 26)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic")
 
 find_package(raylib REQUIRED)
 
 add_executable(jumpThingy
-        src/main.c
-        src/globals.c
+        src/main.cpp
         includes/globals.h
-        src/player.c
+        src/player.cpp
         includes/player.h
-        src/platforms.c
+        src/platforms.cpp
         includes/platforms.h
-        includes/utils.h
 )
 
 target_link_libraries(jumpThingy raylib GL m pthread dl rt X11)
