@@ -1,4 +1,4 @@
-# Jump Thingy
+# Jump Thingy web
 
 **Jump Thingy** is a simple platformer game where you control a character that must jump between platforms while avoiding falling off the screen. It is a project developed in C using [raylib](https://www.raylib.com/) as the graphics library.
 
@@ -25,7 +25,7 @@ In **Jump Thingy**, your goal is to keep the player moving across platforms with
 To compile and run the game, you need:
 
 - **Operating System**: Linux.
-- **Compiler**: GCC or any C-compatible compiler.
+- **Compiler**: emcc.
 - **Libraries**:
     - [raylib](https://github.com/raysan5/raylib) (installed and linked).
 
@@ -37,20 +37,20 @@ To compile and run the game, you need:
    ```bash
    git clone https://github.com/uwiwiow/jump-thingy.git
    cd jump-thingy
+   git checkout web
     ```
-2. Compile the project using CMake:
+2. Compile the project using emcc:
 
     ```bash
-    mkdir build
-    cd build
-    cmake ..
-    make
+    ./build.sh
    ```
 
 3. Run the generated binary:
 
     ```bash
-    ./jumpThingy
+   ./run.sh
+   # or
+   python run.py
     ```
 
 ---

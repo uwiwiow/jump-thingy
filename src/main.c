@@ -38,6 +38,7 @@ int main(void) {
     Rectangle killZone = {-WIDTH, HEIGHT, 2 *WIDTH, 200.0f};
     platformsInit(platforms, platformSize, &platformStart, platformGap);
 
+    // TODO: refactor to not use WindowShouldClose
     // game loop
     while(!WindowShouldClose()) {
 
