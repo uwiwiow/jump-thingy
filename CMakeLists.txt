@@ -13,6 +13,12 @@ add_executable(jumpThingy
         includes/player.h
         src/platforms.cpp
         includes/platforms.h
+        src/game.cpp
+        includes/game.h
+        src/scene.cpp
+        includes/scene.h
+        src/object.cpp
+        includes/object.h
 )
 
 target_link_libraries(jumpThingy raylib GL m pthread dl rt X11)
